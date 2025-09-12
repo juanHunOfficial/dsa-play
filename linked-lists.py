@@ -1,16 +1,20 @@
-# Step 1: Define a Node
-class Node:
-    def __init__(self, val):
-        self.val = val
-        self.next = None
+from typing import Optional, List
+from pydantic import BaseModel, ConfigDict
 
+# Step 1: Define a Node
+class Node(BaseModel):
+    val: int
+    next: Optional['Node'] = None
+
+    model_config = ConfigDict(arbitrary_types_allowed=True)  # Allow recursive Node
 
 # Step 2: Define LinkedList
-class LinkedList:
-    def __init__(self):
-        self.head = None
+class LinkedList(BaseModel):
+    head: Optional[Node] = None
 
-    def append(self, val):
+    model_config = ConfigDict(arbitrary_types_allowed=True)  # Allow modifications
+
+    def append(self, val: int) -> None:
         new_node = Node(val)
         if not self.head:
             self.head = new_node
@@ -20,7 +24,7 @@ class LinkedList:
             current = current.next
         current.next = new_node
 
-    def display(self):
+    def display(self) -> None:
         current = self.head
         while current:
             print(current.val, end=" -> ")
@@ -30,13 +34,13 @@ class LinkedList:
 
 
     # Practice: Insert a node at the beginning
-    def add_to_beginning(self, val):
+    def add_to_beginning(self, val: int) -> None:
         new_node = Node(val)
         new_node.next = self.head
         self.head = new_node
 
     # Practice: Count the number of nodes
-    def count_the_nodes(self):
+    def count_the_nodes(self) -> None:
         curr = self.head
         count = 1
         while curr.next:
@@ -46,7 +50,7 @@ class LinkedList:
         print(count)
 
     # Practice: Delete a node by value
-    def del_node_by_val(self, val):
+    def del_node_by_val(self, val:int) -> None:
         curr, prev = self.head, None
     
         while curr.val is not val:
@@ -60,7 +64,7 @@ class LinkedList:
             del temp
         
     # Practice: Reverse the linked list
-    def reverse_the_list(self):
+    def reverse_the_list(self) -> None:
         pass
 
         

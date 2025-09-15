@@ -15,7 +15,7 @@ class LinkedList(BaseModel):
     model_config = ConfigDict(arbitrary_types_allowed=True)  # Allow modifications
 
     def append(self, val: int) -> None:
-        new_node = Node(val)
+        new_node = Node(val=val)
         if not self.head:
             self.head = new_node
             return
@@ -35,7 +35,7 @@ class LinkedList(BaseModel):
 
     # Practice: Insert a node at the beginning
     def add_to_beginning(self, val: int) -> None:
-        new_node = Node(val)
+        new_node = Node(val=val)
         new_node.next = self.head
         self.head = new_node
 
@@ -65,7 +65,17 @@ class LinkedList(BaseModel):
         
     # Practice: Reverse the linked list
     def reverse_the_list(self) -> None:
-        pass
+        prev, curr, next = None, self.head, self.head.next
+
+        while curr.next:
+            curr.next = prev 
+            prev = curr 
+            curr = next 
+            next = next.next
+        curr.next = prev
+        self.head = curr
+            
+
 
         
 
@@ -82,3 +92,5 @@ ll.count_the_nodes()
 ll.display()  # Output: 1 -> 10 -> 20 -> 30 -> 40 -> 50 -> None
 ll.del_node_by_val(30)
 ll.display() # Output: 1 -> 10 -> 20 -> 40 -> 50 -> None
+ll.reverse_the_list()
+ll.display() # Output: 50 -> 40 -> 20 -> 10 -> 1 -> None

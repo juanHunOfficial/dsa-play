@@ -1,5 +1,4 @@
 """
-EASY
 
 
     1. Valid Palindrome
@@ -30,73 +29,6 @@ EASY
             Input: [1,1,2]
             Output: 2 (array becomes [1,2,_])
 
-=====================================================================================================================================
-
-
-MEDIUM
-
-
-    1. 3Sum
-
-        Description: 
-            Given an integer array nums, return all the triplets [nums[i], nums[j], nums[k]] such that i != j != k and nums[i] + nums[j] + nums[k] == 0.
-        Example:
-            Input: [-1,0,1,2,-1,-4]
-            Output: [[-1,-1,2],[-1,0,1]]
-
-
-
-    2. Container With Most Water
-
-        Description: 
-            You are given an integer array height of length n. There are n vertical lines drawn such that the two endpoints of the ith line are (i, 0) and (i, height[i]). Find two lines that together with the x-axis form a container that holds the most water.
-        Example:
-            Input: [1,8,6,2,5,4,8,3,7]
-            Output: 49
-
-
-
-    3. Sort Colors (Dutch National Flag Problem)
-
-        Description: 
-            Given an array nums with n objects colored red, white, or blue, sort them in-place so that objects of the same color are adjacent, with the colors in the order red, white, and blue. Use integers 0, 1, and 2 to represent the colors.
-        Example:
-            Input: [2,0,2,1,1,0]
-            Output: [0,0,1,1,2,2]
-
-=====================================================================================================================================
-
-
-HARD
-
-
-    1. Trapping Rain Water
-
-        Description: 
-            Given n non-negative integers representing an elevation map where the width of each bar is 1, compute how much water it can trap after raining.
-        Example:
-            Input: [0,1,0,2,1,0,1,3,2,1,2,1]
-            Output: 6
-
-
-
-    2. Minimum Window Substring
-
-        Description: 
-            Given two strings s and t, return the minimum window in s which will contain all the characters in t. If no such window exists, return an empty string.
-        Example:
-            Input: s = "ADOBECODEBANC", t = "ABC"
-            Output: "BANC"
-
-
-
-    3. Longest Substring Without Repeating Characters
-
-        Description: 
-            Given a string s, find the length of the longest substring without repeating characters.
-        Example:
-            Input: "abcabcbb"
-            Output: 3
 
 """
 
@@ -187,13 +119,25 @@ def remove_dupes(arr: list) -> tuple:
         new_list.append(arr[0])
 
     return (len(new_list), new_list)
+
+
+def array_palindrome(arr: list) -> bool:
+    left, right = 0, len(arr) -1
+    while left < right:
+        if arr[left] == arr[right]:
+            left +=1
+            right -=1
+        elif arr[left] != arr[right]:
+            return False
+    return True
     
 def run_tests(test_info: tuple) -> None:
 
     functions = {
         "pally": is_palindrome,
         "sorted_squares": squares_of_sorted_array, 
-        "remove_dupes": remove_dupes
+        "remove_dupes": remove_dupes,
+        "array_pally": array_palindrome
     }
 
     tests, func_name = test_info[0], test_info[1]
@@ -207,7 +151,8 @@ def run_tests(test_info: tuple) -> None:
 all_tests = [
     (["race a car", " ", "No lemon, no melon"], "pally"),
     ([[-7,-3,2,3,11], [0,2], [-5,-4,-1,0,3]], "sorted_squares"),
-    ([[0,0,1,1,1,2,2,3,3,4], [1,2,3], [1,1,1,1]], "remove_dupes")
+    ([[0,0,1,1,1,2,2,3,3,4], [1,2,3], [1,1,1,1]], "remove_dupes"),
+    ([[1, 2, 3, 3, 2, 1], [1, 3, 2, 3, 4], ['a', 'b', 'c', 'b', 'a']], "array_pally")
 ]
 
 for tests in all_tests:
